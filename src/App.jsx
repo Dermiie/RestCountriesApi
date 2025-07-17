@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import MenuBar from './components/MenuBar';
+import SearchBar from './components/SearchBar';
 
 function App() {
   const [data, setData] = useState(null);
@@ -9,17 +10,18 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setData(data);
-
-        console.log(data);
       })
       .catch((err) => console.error('Error loading JSON:', err));
   }, []);
 
   return (
-    <div>
-      <header className="p-4">
+    <div className="h-full">
+      <header>
         <MenuBar></MenuBar>
       </header>
+      <main className="py-8 px-4">
+        <SearchBar></SearchBar>
+      </main>
     </div>
   );
 }

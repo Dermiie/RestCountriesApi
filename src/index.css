@@ -1,1 +1,8 @@
 @import 'tailwindcss';
+
+input::placeholder {
+  margin-left: 3rem;
+  color: #9ca3af; /* Tailwind's gray-400 */
+  font-style: italic;
+  font-size: 14px;
+}
