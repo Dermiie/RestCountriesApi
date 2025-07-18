@@ -1,28 +1,25 @@
 import { useEffect, useState } from 'react';
 import MenuBar from './components/MenuBar';
+import FilterBar from './components/FilterBar';
 import SearchBar from './components/SearchBar';
+import Card from './components/Card';
+import { CountriesProvider } from './contexts/CountriesContext';
 
 function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch('/data.json') // since it's in public/, use relative path
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-      })
-      .catch((err) => console.error('Error loading JSON:', err));
-  }, []);
+  const [countries, setCountries] = useState(null);
 
   return (
-    <div className="h-full">
-      <header>
+    <CountriesProvider>
+      <div className="h-full">
         <MenuBar></MenuBar>
-      </header>
-      <main className="py-8 px-4">
-        <SearchBar></SearchBar>
-      </main>
-    </div>
+
+        <main className="flex flex-col gap-4 py-8 px-4">
+          <SearchBar></SearchBar>
+          <FilterBar></FilterBar>
+          <Card></Card>
+        </main>
+      </div>
+    </CountriesProvider>
   );
 }
 
