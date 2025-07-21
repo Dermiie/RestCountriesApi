@@ -3,7 +3,13 @@ import { createContext, useContext, useEffect, useState } from 'react';
 const CountriesContext = createContext();
 
 function CountriesProvider({ children }) {
-  const [countries, setCountries] = useState({});
+  const [countries, setCountries] = useState([]);
+
+  const [filteredCountriesQuery, setFilteredCountriesQuery] = useState('');
+
+  const filteredCountries = countries.filter((item) =>
+    item?.region?.toLowerCase().includes(filteredCountriesQuery.toLowerCase())
+  );
 
   useEffect(() => {
     fetch('/data.json') // since it's in public/, use relative path
@@ -15,7 +21,14 @@ function CountriesProvider({ children }) {
   }, []);
 
   return (
-    <CountriesContext.Provider value={countries}>
+    <CountriesContext.Provider
+      value={{
+        countries,
+        setFilteredCountriesQuery,
+        filteredCountries,
+        filteredCountriesQuery,
+      }}
+    >
       {children}
     </CountriesContext.Provider>
   );
