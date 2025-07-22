@@ -5,11 +5,11 @@ const CountriesContext = createContext();
 function CountriesProvider({ children }) {
   const [countries, setCountries] = useState([]);
 
+  const [filteredCountries, setFilteredCountries] = useState([]);
+
   const [filteredCountriesQuery, setFilteredCountriesQuery] = useState('');
 
-  const filteredCountries = countries.filter((item) =>
-    item?.region?.toLowerCase().includes(filteredCountriesQuery.toLowerCase())
-  );
+  const [searchedCountriesQuery, setSearchedCountriesQuery] = useState('');
 
   useEffect(() => {
     fetch('/data.json') // since it's in public/, use relative path
@@ -20,10 +20,35 @@ function CountriesProvider({ children }) {
       .catch((err) => console.error('Error loading JSON:', err));
   }, []);
 
+  useEffect(
+    function () {
+      let result = [...countries];
+
+      if (filteredCountriesQuery)
+        result = countries.filter((item) =>
+          item?.region
+            ?.toLowerCase()
+            .includes(filteredCountriesQuery.toLowerCase())
+        );
+
+      if (searchedCountriesQuery)
+        result = countries.filter((country) =>
+          country?.name
+            ?.toLowerCase()
+            .includes(searchedCountriesQuery.toLocaleLowerCase())
+        );
+
+      return setFilteredCountries(result);
+    },
+    [countries, searchedCountriesQuery, filteredCountriesQuery]
+  );
+
   return (
     <CountriesContext.Provider
       value={{
         countries,
+        setSearchedCountriesQuery,
+        searchedCountriesQuery,
         setFilteredCountriesQuery,
         filteredCountries,
         filteredCountriesQuery,

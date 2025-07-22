@@ -3,16 +3,17 @@ import { CountriesContext } from '../contexts/CountriesContext';
 import CountriesCard from './CountriesCard';
 
 function Card() {
-  const { countries, filteredCountries, filteredCountriesQuery } =
-    useContext(CountriesContext);
-
-  const displayList = filteredCountriesQuery ? filteredCountries : countries;
+  const { countries, filteredCountries } = useContext(CountriesContext);
 
   return (
     <>
-      {displayList.map((country) => (
-        <CountriesCard country={country} key={country.cca3} />
-      ))}
+      {filteredCountries.length > 0
+        ? filteredCountries.map((country) => (
+            <CountriesCard key={country.cca3} country={country} />
+          ))
+        : countries.map((country) => (
+            <CountriesCard key={country.cca3} country={country} />
+          ))}
     </>
   );
 }
