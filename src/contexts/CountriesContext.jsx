@@ -20,6 +20,14 @@ function CountriesProvider({ children }) {
       .catch((err) => console.error('Error loading JSON:', err));
   }, []);
 
+  function fetchCurrentCountry(code) {
+    const currentCountry = countries.find((c) => c.alpha3code === code);
+
+    return currentCountry;
+  }
+
+  const currentCountry = fetchCurrentCountry();
+
   useEffect(
     function () {
       let result = [...countries];
@@ -52,6 +60,8 @@ function CountriesProvider({ children }) {
         setFilteredCountriesQuery,
         filteredCountries,
         filteredCountriesQuery,
+        fetchCurrentCountry,
+        currentCountry,
       }}
     >
       {children}

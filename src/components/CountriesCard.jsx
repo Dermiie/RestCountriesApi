@@ -1,8 +1,13 @@
+import { Link } from 'react-router';
+
 function CountriesCard({ country }) {
-  const { flag, name, region, population, capital } = country;
+  const { flag, name, region, population, capital, alpha3code: code } = country;
 
   return (
-    <div className="flex flex-col mx-12 flex-wrap gap-8 my-16 self-center w-fit rounded-md shadow overflow-hidden">
+    <Link
+      to={`/country/${code}`}
+      className="flex flex-col mx-12 flex-wrap gap-8 my-16 self-center w-fit rounded-md shadow overflow-hidden"
+    >
       <div className="rounded-t-lg">
         <img src={flag} alt={`${name} flag`} width="800"></img>
       </div>
@@ -24,7 +29,7 @@ function CountriesCard({ country }) {
           </li>
         </ul>
       </div>
-    </div>
+    </Link>
   );
 }
 
