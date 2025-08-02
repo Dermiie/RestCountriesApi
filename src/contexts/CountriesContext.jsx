@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 const CountriesContext = createContext();
 
@@ -6,6 +6,8 @@ function CountriesProvider({ children }) {
   const [countries, setCountries] = useState([]);
 
   const [filteredCountries, setFilteredCountries] = useState([]);
+
+  const [currentCountry, setCurrentCountry] = useState();
 
   const [filteredCountriesQuery, setFilteredCountriesQuery] = useState('');
 
@@ -21,12 +23,9 @@ function CountriesProvider({ children }) {
   }, []);
 
   function fetchCurrentCountry(code) {
-    const currentCountry = countries.find((c) => c.alpha3code === code);
-
-    return currentCountry;
+    if (!code) return;
+    setCurrentCountry(countries.find((c) => c.alpha3Code == code));
   }
-
-  const currentCountry = fetchCurrentCountry();
 
   useEffect(
     function () {

@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 
 function CountriesCard({ country }) {
-  const { flag, name, region, population, capital, alpha3code: code } = country;
+  const { flag, name, region, population, capital, alpha3Code: code } = country;
 
   return (
     <Link

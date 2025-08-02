@@ -1,6 +1,6 @@
 import { HiOutlineMoon } from 'react-icons/hi';
 
-function MenuBar() {
+function Header() {
   return (
     <div className="p-4 flex justify-between bg-white w-full shadow-md">
       <div>Where in the world</div>
@@ -14,4 +14,4 @@ function MenuBar() {
   );
 }
 
-export default MenuBar;
+export default Header;
