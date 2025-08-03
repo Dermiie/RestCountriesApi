@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
 import { CountriesContext } from '../contexts/CountriesContext';
 import Button from '../components/Button';
 
@@ -17,7 +17,25 @@ function CountriesPage() {
 
   if (!currentCountry) return <p>Country not found.</p>;
 
-  const { name, flag } = currentCountry;
+  const {
+    name,
+    flag,
+    nativeName,
+    population,
+    region,
+    subregion,
+    capital,
+    topLevelDomain,
+    currencies,
+    languages,
+    borders,
+  } = currentCountry;
+
+  const [currency] = currencies;
+
+  const languageName = languages.map((lang) => lang.name);
+
+  const languageList = languageName.join(', ');
 
   function handleBackButton() {
     navigate(-1);
@@ -26,26 +44,61 @@ function CountriesPage() {
   return (
     <div className="flex flex-col gap-8">
       <Button onClick={handleBackButton}>Back</Button>
-      <img src={flag} alt={`${currentCountry?.name} flag`}></img>
+
+      <div className="rounded-lg overflow-hidden">
+        <img src={flag} alt={`${currentCountry?.name} flag`}></img>
+      </div>
+
       <section>
-        <h2>{name}</h2>
-        <ul>
-          <li>Native Name</li>
-          <li>Population</li>
-          <li>Region</li>
-          <li>Sub - Region</li>
-          <li>Capital</li>
+        <h2 className="text-2xl font-bold mb-5">{name}</h2>
+        <ul className="space-y-3  mb-5">
+          <li>
+            <span className="font-bold">Native Name: </span> {nativeName}
+          </li>
+          <li>
+            <span className="font-bold">Population: </span>
+            {population}
+          </li>
+          <li>
+            <span className="font-bold">Region: </span>
+            {region}
+          </li>
+          <li>
+            <span className="font-bold">Sub Region: </span>
+            {subregion}
+          </li>
+          <li>
+            <span className="font-bold">Capital: </span>
+            {capital}
+          </li>
         </ul>
-        <ul>
-          <li>Top Level Domains</li>
-          <li>Currencies</li>
-          <li>Language</li>
+        <ul className="space-y-3  mt-2 mb-5">
+          <li>
+            <span className="font-bold">Top Level Domain:</span>{' '}
+            {topLevelDomain}
+          </li>
+          <li>
+            <span className="font-bold">Currencies: </span>
+            {currency.name}
+          </li>
+          <li>
+            <span className="font-bold">Languages: </span>
+            {languageList}
+          </li>
         </ul>
         <div>
-          <p>Border Countries</p>
-          <button></button>
-          <button></button>
-          <button></button>
+          <p className="font-bold mb-3">Border Countries:</p>
+          <div className="flex gap-4 flex-wrap">
+            {borders.map((border, index) => (
+              <Link
+              to={}
+                key={index}
+                className="p-4 bg-white shadow-2xl inline-block"
+              >
+                {border}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </div>
