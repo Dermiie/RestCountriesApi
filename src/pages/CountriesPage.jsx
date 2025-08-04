@@ -6,7 +6,8 @@ import Button from '../components/Button';
 function CountriesPage() {
   const navigate = useNavigate();
   const { code } = useParams(); // Get the country code from URL
-  const { currentCountry, fetchCurrentCountry } = useContext(CountriesContext);
+  const { currentCountry, fetchCurrentCountry, countries } =
+    useContext(CountriesContext);
 
   useEffect(
     function () {
@@ -89,15 +90,25 @@ function CountriesPage() {
         <div>
           <p className="font-bold mb-3">Border Countries:</p>
           <div className="flex gap-4 flex-wrap">
-            {borders.map((border, index) => (
-              <Link
-              to={}
-                key={index}
-                className="p-4 bg-white shadow-2xl inline-block"
-              >
-                {border}
-              </Link>
-            ))}
+            {borders?.map((border, index) => {
+              const borderCountry = countries.find(
+                (country) => country.alpha3Code === border
+              );
+
+              const borderName = borderCountry ? borderCountry.name : border;
+
+              return (
+                <button
+                  onClick={() =>
+                    navigate(`/country/${borderCountry?.alpha3Code}`)
+                  }
+                  key={index}
+                  className="p-4 bg-white shadow-2xl inline-block"
+                >
+                  {borderName}
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
