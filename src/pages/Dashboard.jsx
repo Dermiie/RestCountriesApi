@@ -6,8 +6,10 @@ import Card from '../components/Card';
 function Dashboard() {
   return (
     <div className="flex flex-col gap-4">
-      <SearchBar></SearchBar>
-      <FilterBar></FilterBar>
+      <div className="flex flex-col md:flex-row md:justify-between gap-4">
+        <SearchBar></SearchBar>
+        <FilterBar></FilterBar>
+      </div>
       <Card></Card>
     </div>
   );

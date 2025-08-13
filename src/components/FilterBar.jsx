@@ -10,7 +10,7 @@ function FilterBar() {
   }
 
   return (
-    <div className="w-[60%] flex flex-col gap-4">
+    <div className=" flex flex-col gap-4">
       <div className="bg-white flex justify-between px-5 py-2.5">
         <p>Filter By Region</p>
         <button onClick={handleClick}>

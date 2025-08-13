@@ -2,7 +2,7 @@ function Button({ children, onClick }) {
   return (
     <div>
       <button
-        className="p-4 bg-white shadow-2xl inline-block"
+        className="py-2 px-8 bg-white shadow-2xl inline-block"
         onClick={onClick}
       >
         {children}

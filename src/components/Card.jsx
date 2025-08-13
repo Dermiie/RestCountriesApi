@@ -6,7 +6,7 @@ function Card() {
   const { countries, filteredCountries } = useContext(CountriesContext);
 
   return (
-    <>
+    <div className="md:grid md:grid-cols-2 lg:grid-cols-4 w-full">
       {filteredCountries.length > 0
         ? filteredCountries.map((country, index) => (
             <CountriesCard key={index} country={country} />
@@ -14,7 +14,7 @@ function Card() {
         : countries.map((country, index) => (
             <CountriesCard key={index} country={country} />
           ))}
-    </>
+    </div>
   );
 }
 

@@ -50,6 +50,11 @@ function CountriesProvider({ children }) {
     [countries, searchedCountriesQuery, filteredCountriesQuery]
   );
 
+  function formatNumber(num) {
+    return num.toLocaleString();
+  }
+
+
   return (
     <CountriesContext.Provider
       value={{
@@ -61,6 +66,7 @@ function CountriesProvider({ children }) {
         filteredCountriesQuery,
         fetchCurrentCountry,
         currentCountry,
+        formatNumber
       }}
     >
       {children}

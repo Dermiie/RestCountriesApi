@@ -1,12 +1,12 @@
 import { useContext, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { CountriesContext } from '../contexts/CountriesContext';
 import Button from '../components/Button';
 
 function CountriesPage() {
   const navigate = useNavigate();
   const { code } = useParams(); // Get the country code from URL
-  const { currentCountry, fetchCurrentCountry, countries } =
+  const { currentCountry, fetchCurrentCountry, countries, formatNumber } =
     useContext(CountriesContext);
 
   useEffect(
@@ -39,12 +39,12 @@ function CountriesPage() {
   const languageList = languageName.join(', ');
 
   function handleBackButton() {
-    navigate(-1);
+    navigate('/');
   }
 
   return (
     <div className="flex flex-col gap-8">
-      <Button onClick={handleBackButton}>Back</Button>
+      <Button onClick={handleBackButton}>&#8592; Back</Button>
 
       <div className="rounded-lg overflow-hidden">
         <img src={flag} alt={`${currentCountry?.name} flag`}></img>
@@ -58,7 +58,7 @@ function CountriesPage() {
           </li>
           <li>
             <span className="font-bold">Population: </span>
-            {population}
+            {formatNumber(population)}
           </li>
           <li>
             <span className="font-bold">Region: </span>

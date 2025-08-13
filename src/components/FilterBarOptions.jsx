@@ -9,7 +9,7 @@ function FilterBarOptions() {
   }
 
   return (
-    <ul className="bg-white flex flex-col gap-2 justify-between px-7 py-2.5">
+    <ul className="bg-white flex flex-col gap-2 justify-between z-10 px-7 py-2.5">
       <li onClick={() => handleClick('Africa')}>Africa</li>
       <li onClick={() => handleClick('Polar')}>Antarctica</li>
       <li onClick={() => handleClick('Asia')}>Asia</li>
