@@ -32,11 +32,13 @@ function CountriesProvider({ children }) {
       let result = [...countries];
 
       if (filteredCountriesQuery)
-        result = countries.filter((item) =>
-          item?.region
-            ?.toLowerCase()
-            .includes(filteredCountriesQuery.toLowerCase())
-        );
+        filteredCountriesQuery === ''
+          ? (result = [...countries])
+          : (result = countries.filter((item) =>
+              item?.region
+                ?.toLowerCase()
+                .includes(filteredCountriesQuery.toLowerCase())
+            ));
 
       if (searchedCountriesQuery)
         result = countries.filter((country) =>
@@ -54,7 +56,6 @@ function CountriesProvider({ children }) {
     return num.toLocaleString();
   }
 
-
   return (
     <CountriesContext.Provider
       value={{
@@ -66,7 +67,7 @@ function CountriesProvider({ children }) {
         filteredCountriesQuery,
         fetchCurrentCountry,
         currentCountry,
-        formatNumber
+        formatNumber,
       }}
     >
       {children}

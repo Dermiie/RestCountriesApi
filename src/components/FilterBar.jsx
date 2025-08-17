@@ -10,14 +10,22 @@ function FilterBar() {
   }
 
   return (
-    <div className=" flex flex-col gap-4">
-      <div className="bg-white flex justify-between px-5 py-2.5">
+    <div className=" flex flex-col gap-4 relative ">
+      <button
+        className="bg-white flex justify-between px-5 py-2.5 cursor-pointer rounded-md shadow-md"
+        onClick={handleClick}
+      >
         <p>Filter By Region</p>
-        <button onClick={handleClick}>
+        <span>
           <HiChevronDown />
-        </button>
-      </div>
-      {openOptions && <FilterBarOptions></FilterBarOptions>}
+        </span>
+      </button>
+      {openOptions && (
+        <FilterBarOptions
+          openOptions={openOptions}
+          setOpenOptions={setOpenOptions}
+        ></FilterBarOptions>
+      )}
     </div>
   );
 }
